@@ -1,0 +1,24 @@
+{
+  "name": "bikepe_analytics",
+  "version": "0.5.0",
+  "description": "Project that analyzes data from BikePE (Bike sharing system from Pernambuco)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iacapuca/bikepe_analytics.git"
+  },
+  "author": "Igor Matos and Pedro Luiz Barreto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iacapuca/bikepe_analytics/issues"
+  },
+  "homepage": "https://github.com/iacapuca/bikepe_analytics#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "wedeploy": "^4.2.0"
+  }
+}
