@@ -1,0 +1,48 @@
+<html>
+    <head>
+    <meta charset="utf-8" />
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+    <script src="http://dimplejs.org/dist/dimple.v2.3.0.js"></script>
+    <script src="https://cdn.wedeploy.com/api/4.1.0/wedeploy.js"></script>
+    <!-- <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script> -->
+    <title> BikePE - Análise de Dados</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+        WeDeploy
+        .data('https://bikepe-bikeanalytics.wedeploy.io')
+        .limit(96)
+        // .aggregate('min_bike', 'bikes_available', 'min')
+        .where('bikes_available', '>', '0')
+        .orderBy('timestamp', 'asc')
+        .get('history')
+        .then(function(response) {
+            console.log('Response');
+            console.log(response);
+
+            var svg = dimple.newSvg("body", 800, 600);
+            var chart = new dimple.chart(svg, response);
+            var x = chart.addCategoryAxis("x", "timestamp");
+            x.addOrderRule("Date")
+            
+            chart.addMeasureAxis("y", "bikes_available");
+            chart.addSeries(null, dimple.plot.bar);
+            chart.draw();
+        });
+        
+
+    // var svg = dimple.newSvg("#chartContainer", 590, 400);
+    // d3.tsv("/data/example_data.tsv", function (data) {
+
+    // var x = myChart.addCategoryAxis("x", "Month");
+    // x.addOrderRule("Date");
+
+    // myChart.addMeasureAxis("y", "Unit Sales");
+    // myChart.addSeries("Channel", dimple.plot.bar);
+    // myChart.addLegend(60, 10, 510, 20, "right");
+    // myChart.draw();
+    // });
+    </script>
+  </body>
+  
+  </html>
