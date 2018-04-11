@@ -5,7 +5,7 @@ function isServiceHour(){
     var recifeTime = new Date(now.valueOf() + now.getTimezoneOffset() * 60000 - 180 * 60000);
     console.log('Recife time: ' + recifeTime);
 
-    if (now.getHours() >= 5 && now.getHours() < 23) {
+    if (recifeTime.getHours() >= 5 && recifeTime.getHours() < 23) {
         return true;
     }
     else {
