@@ -3,7 +3,7 @@ import './List.css';
 import Loading from '../common/Loading'
 import { handleResponse } from '../../helper';
 import { API_URL } from '../../config';
-import Table from './Table';
+import TableStation from './Table';
 
 
 class List extends React.Component {
@@ -48,7 +48,7 @@ class List extends React.Component {
         }
 
         return (
-            <Table stations={stations}/>
+            <TableStation stations={stations}/>
         );
     }
 }

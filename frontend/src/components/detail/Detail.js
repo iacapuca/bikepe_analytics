@@ -1,6 +1,8 @@
 import React from 'react';
 import {API_URL} from '../../config';
 import {handleResponse} from '../../helper';
+import Loading from '../common/Loading';
+import Chart from '../chart/Chart';
 import './Detail.css';
 
 class Detail extends React.Component {
@@ -15,7 +17,7 @@ class Detail extends React.Component {
     }
 
     componentDidMount() {
-        const stationID = this.props.match.params.station_id;
+        const stationID = parseInt(this.props.match.params.station_id);
 
         this.setState({loading: true});
 
@@ -23,51 +25,45 @@ class Detail extends React.Component {
             .then(handleResponse)
             .then((response) => {
                 let stations = response.data.stations
-                const stationData = stations.filter(station => station.station_id === 1);
-                console.log(stationData);
+                const stationData = stations.filter(station => station.station_id === stationID);
+                console.log(stationData[0].station_id);
                 console.log(stationID);
-                this.setState({loading: false, error: null, station: stationData});
+                this.setState({loading: false, error: null, station: stationData[0]});
+                console.log(this.state)
             })
             .catch((error) => {
                 console.log('error', error)
             })
     }
     render() {
-        const {station} = this.state;
+        const {loading, station} = this.state;
+
+        if (loading) {
+            return <div className="loading-container"><Loading /></div>
+        }
 
         return (
             <div className="Detail">
                 <h1 className="Detail-heading">
-                    Teste:{station.station_id}
+                    Estação:{station.station_id}
                 </h1>
 
                 <div className="Detail-container">
                     <div className="Detail-item">
-                        Price
-                        <span className="Detail-value">$
+                        Bicicletas Disponiveis
+                        <span className="Detail-value">
+                        {station.num_bikes_available}
                         </span>
                     </div>
                     <div className="Detail-item">
-                        Rank
-                        <span className="Detail-value">teste</span>
+                        Vagas Disponiveis
+                        <span className="Detail-value">
+                        {station.num_docks_available}
+                        </span>
                     </div>
                     <div className="Detail-item">
-                        24H Change
-                        <span className="Detail-value">não</span>
-                    </div>
-                    <div className="Detail-item">
-                        <span className="Detail-title">Market cap</span>
-                        <span className="Detail-dollar">$</span>
-                        Teste
-                    </div>
-                    <div className="Detail-item">
-                        <span className="Detail-title">24H Volume</span>
-                        <span className="Detail-dollar">$</span>
-                        1
-                    </div>
-                    <div className="Detail-item">
-                        <span className="Detail-title">Total supply</span>
-                        42
+                        <span className="Detail-title">Bicicletas alugadas nas ultimas 24H</span>
+                        <Chart />
                     </div>
                 </div>
             </div>
