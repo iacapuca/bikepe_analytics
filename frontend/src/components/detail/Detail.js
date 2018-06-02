@@ -17,23 +17,23 @@ class Detail extends React.Component {
     }
 
     componentDidMount() {
-        const stationID = parseInt(this.props.match.params.station_id);
+        const stationID = parseInt(this.props.match.params.station_id, 10);
 
         this.setState({loading: true});
 
         fetch(`${API_URL}/station_status`)
             .then(handleResponse)
             .then((response) => {
-                let stations = response.data.stations
+                let stations = response.data.stations;
                 const stationData = stations.filter(station => station.station_id === stationID);
                 console.log(stationData[0].station_id);
                 console.log(stationID);
                 this.setState({loading: false, error: null, station: stationData[0]});
-                console.log(this.state)
+                console.log(this.state);
             })
             .catch((error) => {
-                console.log('error', error)
-            })
+                console.log('error', error);
+            });
     }
     render() {
         const {loading, station} = this.state;
@@ -67,7 +67,7 @@ class Detail extends React.Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
