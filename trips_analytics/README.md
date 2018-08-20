@@ -1,0 +1,2 @@
+## Pipeline
+Recebe .csv com estações, realiza map de cada linha, passando como parâmetro de função a lat/lng de origem e lat/lng de destino, a função retorna uma polyline que **pode** ser salvada como hash dentro da coluna de route, ou salva enquanto conjunto de pontos.
